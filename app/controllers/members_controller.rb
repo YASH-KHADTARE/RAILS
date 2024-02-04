@@ -1,4 +1,51 @@
 class MembersController < ApplicationController
-  def all_members
-    @all_members = Member.all
+  before_action :set_member, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @members = Member.all
+    render json: @members
+  end
+
+  def show
+  end
+
+  def new
+    @member = Member.new
+  end
+
+  def create
+    @member = Member.new(member_params)
+
+    if @member.save
+      render json: @member, notice: 'Member was successfully created.'
+    else
+      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @member.update(member_params)
+      render json: @member, notice: 'Member was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @member.destroy
+    redirect_to members_url, notice: 'Member was successfully destroyed.'
+  end
+
+  private
+
+  def set_member
+    @member = Member.find(params[:id])
+  end
+
+  def member_params
+    params.require(:member).permit(:name, :date_of_birth, :email, :gender)
+  end
 end
