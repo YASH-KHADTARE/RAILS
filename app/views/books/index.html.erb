@@ -1,0 +1,18 @@
+<h1>LIST OF BOOKS</h1>
+
+<% for book in @books do%>
+<div>
+  <h2><%= book.title %></h2>
+  <p>Author : <%= book.author %></p>
+  <p>Genere : <%= book.genere %></p>
+  <p>Publish Year : <%= book.publish_year %></p>
+  <p>ISBN : <%= book.ISBN %></p>
+  <%= link_to 'Edit', edit_book_path(book) %>
+  <%= link_to 'Delete', book_path(book) ,data: {turbo_method: :delete ,turbo_confirm: "Are you Sure ?"}%>
+  
+  <br>
+<% end %>
+
+<%= link_to 'Create', new_book_path%>
+
+</div>    

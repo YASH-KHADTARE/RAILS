@@ -1,0 +1,9 @@
+<h1>ALL MEMBERS</h1>
+<% for member in @members do %>
+  <div>
+    <h2><%= member.name %></h2>
+    <%= link_to 'Edit', edit_member_path(member) %>
+    <%= link_to 'Delete', member_path(member), data: { turbo_method: :delete, turbo_confirm: "Are You Sure" } %>
+  </div>
+<% end %>
+<%= link_to 'New', new_member_path %>

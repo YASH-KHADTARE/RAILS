@@ -5,7 +5,6 @@ class TransactionsController < ApplicationController
 
   def index
     @transactions = Transaction.all
-    render json: @transactions
   end
 
   def show
@@ -20,7 +19,7 @@ def create
   @transaction = Transaction.new(transaction_params)
 
   if @transaction.save
-    render json: @transaction, status: :created
+    redirect_to transactions_path, status: :created
   else
     render json: { errors: @transaction.errors.full_messages }, status: :unprocessable_entity
   end
@@ -32,7 +31,7 @@ end
 
   def update
     if @transaction.update(transaction_params)
-      render json: @transaction, notice: 'Transaction was successfully updated.'
+      redirect_to transactions_path, notice: 'Transaction was successfully updated.'
     else
       render :edit
     end
@@ -40,7 +39,7 @@ end
 
   def destroy
     @transaction.destroy
-    redirect_to transactions_url, notice: 'Transaction was successfully destroyed.'
+    redirect_to transactions_path, notice: 'Transaction was successfully destroyed.'
   end
 
   private
