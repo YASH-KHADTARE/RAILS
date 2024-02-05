@@ -3,7 +3,6 @@ class MembersController < ApplicationController
 
   def index
     @members = Member.all
-    render json: @members
   end
 
   def show
@@ -17,7 +16,7 @@ class MembersController < ApplicationController
     @member = Member.new(member_params)
 
     if @member.save
-      render json: @member, notice: 'Member was successfully created.'
+      redirect_to members_path @member, notice: 'Member was successfully created.'
     else
       render :new
     end
@@ -28,7 +27,7 @@ class MembersController < ApplicationController
 
   def update
     if @member.update(member_params)
-      render json: @member, notice: 'Member was successfully updated.'
+      redirect_to members_path, notice: 'Member was successfully updated.'
     else
       render :edit
     end

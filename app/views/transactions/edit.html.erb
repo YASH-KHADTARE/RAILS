@@ -1,0 +1,22 @@
+<h1>Edit Transaction</h1>
+
+<%= form_with(model: @transaction, local: true) do |form| %>
+  <div>
+    <%= form.label :issue_date %>
+    <%= form.date_field :issue_date %>
+  </div>
+
+  <div>
+    <%= form.label :due_date %>
+    <%= form.date_field :due_date %>
+  </div>
+
+  <div>
+    <%= form.label :return_date %>
+    <%= form.date_field :return_date %>
+  </div>
+
+  <%= form.submit "Update Transaction" %>
+<% end %>
+
+<%= link_to "Back to Transactions", transactions_path %>
